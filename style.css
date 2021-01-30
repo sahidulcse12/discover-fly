@@ -131,3 +131,7 @@ nav ul li a:hover, a.active{
     border-radius: 5px;
     color: white;
 }
+
+#popup{
+    display: none;
+}

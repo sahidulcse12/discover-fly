@@ -15,6 +15,10 @@ document.getElementById('ticketEconomy-decrease').addEventListener('click',funct
     handleTicket('ticketEconomy',false);
 })
 
+function alertFunction(){
+    alert("successfully submitted");
+}
+
 
 function handleTicket(ticket,isIncrease){
     const ticketInput = document.getElementById(ticket +'-value');
