@@ -1,4 +1,3 @@
-
 document.getElementById('ticketFirstClass-increase').addEventListener('click',function(){
     handleTicket('ticketFirstClass',true);
 })
@@ -6,6 +5,7 @@ document.getElementById('ticketFirstClass-increase').addEventListener('click',fu
 document.getElementById('ticketFirstClass-decrease').addEventListener('click',function(){
     handleTicket('ticketFirstClass',false);
 })
+
 
 document.getElementById('ticketEconomy-increase').addEventListener('click',function(){
     handleTicket('ticketEconomy',true);
@@ -15,44 +15,40 @@ document.getElementById('ticketEconomy-decrease').addEventListener('click',funct
     handleTicket('ticketEconomy',false);
 })
 
-function alertFunction(){
-    alert("successfully submitted");
-}
 
-
-function handleTicket(ticket,isIncrease){
-    const ticketInput = document.getElementById(ticket +'-value');
-    const ticketNumber = parseInt(ticketInput.value);
+const handleTicket = (id,isIncrease) =>{
+    console.log('ok');
+    const firstClassTicketValue = document.getElementById(id +'-value').value;
+    const ticketNumber = parseInt(firstClassTicketValue);
     let newTicketNumber = ticketNumber;
     if(isIncrease == true){
         newTicketNumber = ticketNumber + 1;
     }
-    if(isIncrease == false && newTicketNumber>0){
+    if(isIncrease == false && newTicketNumber > 0){
         newTicketNumber = ticketNumber - 1;
     }
-    document.getElementById(ticket + '-value').value = newTicketNumber;
-    ticketPrices();
+    document.getElementById(id +'-value').value = newTicketNumber;
+    ticketPrice();
 }
 
-function ticketPrices(){
-    const firstClassTicket = getInputValue('ticketFirstClass');
-    const economyClass = getInputValue('ticketEconomy');
-    
-    const subtotalAmount = firstClassTicket*150 + economyClass*100;
-    document.getElementById('subtotal').innerText ='$' + subtotalAmount;
+const ticketPrice = () =>{
+    const ticketFirstClassValue = getTicket('ticketFirstClass');
+    const ticketEconomyClassValue = getTicket('ticketEconomy');
 
-    const taxAmount = Math.round(subtotalAmount*0.1);
+    const ticketSubtotal = ticketFirstClassValue*150 + ticketEconomyClassValue*100;
+    document.getElementById('subtotal').innerText = '$' + ticketSubtotal;
+
+    const taxAmount = (ticketSubtotal*.1);
     document.getElementById('tax').innerText = '$' + taxAmount;
 
-    const totalAmount = subtotalAmount + taxAmount;
+    const totalAmount = ticketSubtotal - taxAmount;
     document.getElementById('total').innerText = '$' + totalAmount;
-    
 }
 
-function getInputValue(ticket){
-    const ticketInput = document.getElementById(ticket + '-value');
-    const ticketCount = parseInt(ticketInput.value);
+function getTicket(ticket){
+    const currentValue = document.getElementById(ticket +'-value');
+    const updateValue = parseInt(currentValue.value);
 
-    return ticketCount;
+    return updateValue;
+
 }
-
